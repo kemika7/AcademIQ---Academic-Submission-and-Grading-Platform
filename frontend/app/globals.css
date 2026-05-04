@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --primary: 240 90% 56%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 40%;
+    --accent: 240 5% 96%;
+    --accent-foreground: 240 10% 4%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 240 90% 56%;
+    --radius: 0.65rem;
+  }
+
+  .dark {
+    --background: 220 25% 3%;
+    --foreground: 0 0% 98%;
+    --card: 220 20% 7%;
+    --card-foreground: 0 0% 98%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 220 25% 3%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 65%;
+    --accent: 220 15% 14%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 15% 14%;
+    --input: 220 15% 14%;
+    --ring: 210 100% 60%;
+    --teal: 175 75% 55%;
+  }
+
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl transition-all;
+  }
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, hsl(var(--primary) / 0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .glass-card:hover {
+    @apply -translate-y-0.5 border-white/20 shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)];
+  }
+  .pill {
+    @apply inline-flex h-8 items-center gap-1.5 rounded-full border px-3 text-xs font-medium transition-colors;
+  }
+  .pill-primary {
+    @apply border-primary/30 bg-primary/10 text-primary hover:bg-primary/20;
+  }
+  .pill-teal {
+    @apply border-[hsl(var(--teal)/0.3)] bg-[hsl(var(--teal)/0.1)] text-[hsl(var(--teal))] hover:bg-[hsl(var(--teal)/0.2)];
+  }
+  .pill-ghost {
+    @apply border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground;
+  }
+  .pill-danger {
+    @apply border-destructive/30 bg-destructive/10 text-destructive hover:bg-destructive/20;
+  }
+  .status-tag {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider;
+  }
+}
